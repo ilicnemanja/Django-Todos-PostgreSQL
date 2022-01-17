@@ -1,0 +1,29 @@
+{% extends 'todos/base.html' %}
+
+{% block content %}
+    <div class="container">
+        <div class="row mt-5">
+            <div class="col-md-8 offset-md-2">
+                <div class="card">
+                    <div class="card-header shadow-sm bg-white">
+                        <h1 class="display-5 text-primary"><i class="fas fa-edit"></i> Todos</h1>
+                    </div>
+                    <div class="card-body">
+                    {% comment %} Treba da se uradi form inline {% endcomment %}
+                    <form action="{% url 'update_todo_item' todo_list.id %}" method="POST">
+                        {% csrf_token %}
+                        <textarea class="form-control flex-grow-1 text-secondary" name="textarea" id="textarea">{{todo_list.content}}</textarea>
+                    <div class="form-inline form-row">
+                        <button type="submit" class="btn btn-sm text-success"><a href="{% url 'update_todo_item' todo_list.id %}"></a><i class="fas fa-pen text-success"></i> Edit</button>
+                    </form>
+                    <form action="{% url 'delete_todo_item' todo_list.id %}" method="POST">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-sm text-danger"><a href="{% url 'delete_todo_item' todo_list.id %}"></a><i class="far fa-trash-alt text-danger"></i> Delete</button>
+                        </div>
+                    </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
